@@ -1,0 +1,24 @@
+[
+    {
+        "id":1,
+        "nom": "Pilier1",
+        "description": "Consolider la démocratie, l’État de droit et la bonne gouvernance",
+        "dateCreation": "1511890346",
+        "dateMiseAJour": "1511890346"
+    },
+    {
+        "id":2,
+        "nom": "Pilier2",
+        "description": "Engager la transformation structurelle de l’économie",
+        "dateCreation": "1511890346",
+        "dateMiseAJour": "1511890346"
+    },
+
+    {
+        "id":3,
+        "nom": "Pilier3",
+        "description": "Amélioration des conditions de vie des populations",
+        "dateCreation": "1511890346",
+        "dateMiseAJour": "1511890346"
+    }
+]
