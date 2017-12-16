@@ -66,6 +66,28 @@ public class CommentaireController {
         return new ResponseEntity<Commentaire>(commentaire, httpStatus);
     }
 
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/stats/{entityType}")
+    @ApiVersions({"1.0"})
+    @ApiOperation(value = "Read all comments for entity", notes = "Read all comments for entity")
+    public ResponseEntity<Integer> readCommentByEntity(@PathVariable("entityType") String entityType ) {
+        EntityType entite = EntityType.valueOf(entityType);
+        int nbCommentaire =0;
+        HttpStatus httpStatus = null;
+
+        try {
+            nbCommentaire = commentaireService.getAllCommentByEntity(entite);
+            httpStatus = HttpStatus.OK;
+        } catch (SQLException ex) {
+            Logger.getLogger(CommentaireController.class.getName()).log(Level.SEVERE, null, ex);
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Integer>(nbCommentaire, httpStatus);
+
+    }
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/{entityType}/{entityId}")
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Read a comments", notes = "Read a comments")

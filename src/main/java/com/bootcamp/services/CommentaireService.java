@@ -58,6 +58,12 @@ public class CommentaireService implements DatabaseConstants {
         return CommentaireCRUD.read(criterias);
     }
 
+    public int getAllCommentByEntity(EntityType entityType) throws SQLException {
+        Criterias criterias = new Criterias();
+        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), null));
+        return CommentaireCRUD.read(criterias).size();
+    }
+
     public List<Commentaire> readAll(HttpServletRequest request) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         Criterias criterias = RequestParser.getCriterias(request);
         List<String> fields = RequestParser.getFields(request);
