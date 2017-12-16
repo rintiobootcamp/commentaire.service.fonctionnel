@@ -15,14 +15,28 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import java.lang.reflect.Method;
 
+/**
+ *
+ * @author Bello
+ */
 public class ApiVersionRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
 
     private final String prefix;
 
+    /**
+     *
+     * @param prefix
+     */
     public ApiVersionRequestMappingHandlerMapping(String prefix) {
         this.prefix = prefix;
     }
 
+    /**
+     *
+     * @param method
+     * @param handlerType
+     * @return
+     */
     @Override
     protected RequestMappingInfo getMappingForMethod(Method method, Class<?> handlerType) {
         RequestMappingInfo info = super.getMappingForMethod(method, handlerType);
