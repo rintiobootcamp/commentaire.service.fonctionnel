@@ -131,4 +131,18 @@ public class CommentaireService implements DatabaseConstants {
         }
         return false;
     }
+
+    /**
+     * Count all the comments of the given entity type
+     *
+     * @param entityType
+     * @return count
+     * @throws SQLException
+     */
+    public int getAllCommentByEntity(EntityType entityType) throws SQLException {
+        Criterias criterias = new Criterias();
+        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), null));
+        return CommentaireCRUD.read(criterias).size();
+    }
+
 }
