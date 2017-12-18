@@ -27,6 +27,10 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import javax.validation.Validator;
 import java.util.Locale;
 
+/**
+ *
+ * @author Bello
+ */
 @SpringBootApplication
 @Configuration
 @ComponentScan({"com.bootcamp"})
@@ -39,17 +43,30 @@ public class Application extends SpringBootServletInitializer {
 
     private static Logger logger = LogManager.getLogger(Application.class);
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
         SpringApplication.run(Application.class, args);
 
     }
 
+    /**
+     *
+     * @param application
+     * @return
+     */
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(Application.class);
     }
 
+    /**
+     *
+     * @return
+     */
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
@@ -57,6 +74,10 @@ public class Application extends SpringBootServletInitializer {
         return slr;
     }
 
+    /**
+     *
+     * @return
+     */
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
@@ -65,7 +86,10 @@ public class Application extends SpringBootServletInitializer {
         return messageSource;
     }
 
-
+    /**
+     *
+     * @return
+     */
     @Primary
     @Bean
     public Validator validator(){

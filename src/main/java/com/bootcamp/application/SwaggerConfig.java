@@ -25,10 +25,18 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ *
+ * @author Bello
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurationSupport {
 
+    /**
+     *
+     * @return
+     */
     @Bean
     public Docket simpleDiffServiceApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -53,6 +61,10 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                 .license("MIT License").licenseUrl("http://opensource.org/licenses/MIT").build();
     }
 
+    /**
+     *
+     * @param registry
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
