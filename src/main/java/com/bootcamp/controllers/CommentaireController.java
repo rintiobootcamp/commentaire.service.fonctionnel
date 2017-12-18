@@ -19,6 +19,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author Bello
+ */
 @RestController("CommentaireController")
 @RequestMapping("/commentaires")
 @Api(value = "Commentaire API", description = "Commentaire API")
@@ -31,6 +35,12 @@ public class CommentaireController {
     @Autowired
     HttpServletRequest request;
 
+    /**
+     * Create a new comment in the database
+     *
+     * @param comment
+     * @return comment
+     */
     @RequestMapping(method = RequestMethod.POST)
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Create a new commentaire", notes = "Create a new commentaire")
@@ -47,6 +57,12 @@ public class CommentaireController {
         return new ResponseEntity<Commentaire>(comment, httpStatus);
     }
 
+    /**
+     * Get a comment by its id
+     *
+     * @param id
+     * @return comment
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Read a comments", notes = "Read a comments")
@@ -66,15 +82,13 @@ public class CommentaireController {
         return new ResponseEntity<Commentaire>(commentaire, httpStatus);
     }
 
-
-
-
     @RequestMapping(method = RequestMethod.GET, value = "/stats/{entityType}")
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Read all comments for specifique entity", notes = "Read all comments for specifique entity")
     public ResponseEntity<List<Commentaire>> readNumberCommentBySpecificEntity(@PathVariable("entityType") String entityType ,@RequestParam("startDate") long startDate, @RequestParam("endDate") long endDate  ) {
         EntityType entite = EntityType.valueOf(entityType);
         List<Commentaire> commentaires = new ArrayList<>();
+
         HttpStatus httpStatus = null;
 
         try {
@@ -93,18 +107,24 @@ public class CommentaireController {
 
     }
 
-
+    /**
+     * Get all the comments of a given entity
+     *
+     * @param entityType
+     * @param entityId
+     * @return comments list
+     */
 
     @RequestMapping(method = RequestMethod.GET, value = "/{entityType}/{entityId}")
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Read a comments", notes = "Read a comments")
-    public ResponseEntity<List<Commentaire>> readByEntity(@PathVariable("entityType") String entityType,@PathVariable("entityId") int entityId) {
+    public ResponseEntity<List<Commentaire>> readByEntity(@PathVariable("entityType") String entityType, @PathVariable("entityId") int entityId) {
         EntityType entite = EntityType.valueOf(entityType);
         List<Commentaire> commentaire = new ArrayList<Commentaire>();
         HttpStatus httpStatus = null;
 
         try {
-            commentaire = commentaireService.getByEntity(entite,entityId);
+            commentaire = commentaireService.getByEntity(entite, entityId);
             httpStatus = HttpStatus.OK;
         } catch (SQLException ex) {
             Logger.getLogger(CommentaireController.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,9 +135,12 @@ public class CommentaireController {
     }
 
 
-
-
-
+    /**
+     * Get all the comments of the database
+     *
+     * @return comments list
+     * @throws Exception
+     */
 
     @RequestMapping(method = RequestMethod.GET)
     @ApiVersions({"1.0"})
@@ -126,19 +149,24 @@ public class CommentaireController {
         HttpStatus httpStatus = null;
         List<Commentaire> commentaires = commentaireService.readAll(request);
         httpStatus = HttpStatus.OK;
-        return new ResponseEntity<List<Commentaire>>(commentaires,httpStatus);
+        return new ResponseEntity<List<Commentaire>>(commentaires, httpStatus);
     }
 
-    @RequestMapping(value="/{id}",method = RequestMethod.DELETE)
+    /**
+     * Delete a comment by its id
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiVersions({"1.0"})
     @ApiOperation(value = "delete commentaire ", notes = "delete commentaire by id")
     public ResponseEntity<Commentaire> delete(@PathVariable int id) throws Exception {
         HttpStatus httpStatus = null;
         Commentaire commentaire = commentaireService.delete(id);
         httpStatus = HttpStatus.OK;
-        return new ResponseEntity<Commentaire>(commentaire,httpStatus);
+        return new ResponseEntity<Commentaire>(commentaire, httpStatus);
     }
-    
-    
-    
+
 }

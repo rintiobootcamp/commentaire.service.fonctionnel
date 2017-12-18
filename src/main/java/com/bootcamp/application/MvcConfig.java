@@ -13,10 +13,17 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
-
+/**
+ *
+ * @author Bello
+ */
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
+    /**
+     *
+     * @return
+     */
     @Bean
     @Description("Thymeleaf template resolver serving HTML 5")
     public ClassLoaderTemplateResolver templateResolver() {
@@ -32,6 +39,10 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         return templateResolver;
     }
 
+    /**
+     *
+     * @return
+     */
     @Bean
     @Description("Thymeleaf template engine with Spring integration")
     public SpringTemplateEngine templateEngine() {
@@ -42,6 +53,10 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         return templateEngine;
     }
 
+    /**
+     *
+     * @return
+     */
     @Bean
     @Description("Thymeleaf view resolver")
     public ViewResolver viewResolver() {
