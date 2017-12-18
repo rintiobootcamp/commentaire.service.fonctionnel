@@ -303,4 +303,76 @@
     
 ]
 >>>>>>> 42665e127a03cef58db99be0294a2f2cecbd7518
+[m[32m2017-12-18 20:19:35.624 WAT [main] c.b.i.CommentaireControllerIntegrationTest DEBUG: 0
+[m[32m2017-12-18 20:19:35.702 WAT [main] c.b.i.CommentaireControllerIntegrationTest DEBUG: {
+    "timestamp": 1513624773584,
+    "status": 500,
+    "error": "Internal Server Error",
+    "exception": "javax.persistence.PersistenceException",
+    "message": "Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException\nInternal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)\nError Code: 1045",
+    "path": "/commentaire/commentaires"
+}
+[m[32m2017-12-18 20:19:37.229 WAT [main] c.b.i.CommentaireControllerIntegrationTest DEBUG: {
+    "timestamp": 1513624776925,
+    "status": 500,
+    "error": "Internal Server Error",
+    "exception": "javax.persistence.PersistenceException",
+    "message": "Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException\nInternal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)\nError Code: 1045",
+    "path": "/commentaire/commentaires/0"
+}
+[m[32m2017-12-18 20:19:39.377 WAT [main] c.b.i.CommentaireControllerIntegrationTest DEBUG: {
+    "timestamp": 1513624778864,
+    "status": 400,
+    "error": "Bad Request",
+    "exception": "org.springframework.web.bind.MissingServletRequestParameterException",
+    "message": "Required long parameter 'startDate' is not present",
+    "path": "/commentaire/commentaires/stats/PROJET"
+}
+[m[32m2017-12-18 20:20:34.795 WAT [main] c.b.i.CommentaireControllerIntegrationTest DEBUG: [
+    
+]
+[m[32m2017-12-18 20:20:36.216 WAT [main] c.b.i.CommentaireControllerIntegrationTest DEBUG: [
+    
+]
+[m[32m2017-12-18 20:43:47.514 WAT [main] c.b.i.CommentaireControllerIntegrationTest DEBUG: 0
+[m[32m2017-12-18 20:43:47.576 WAT [main] c.b.i.CommentaireControllerIntegrationTest DEBUG: {
+    "timestamp": 1513626226371,
+    "status": 500,
+    "error": "Internal Server Error",
+    "exception": "javax.persistence.PersistenceException",
+    "message": "Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException\nInternal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)\nError Code: 1045",
+    "path": "/commentaire/commentaires"
+}
+[m[32m2017-12-18 20:43:48.754 WAT [main] c.b.i.CommentaireControllerIntegrationTest DEBUG: {
+    "timestamp": 1513626228698,
+    "status": 500,
+    "error": "Internal Server Error",
+    "exception": "javax.persistence.PersistenceException",
+    "message": "Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException\nInternal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)\nError Code: 1045",
+    "path": "/commentaire/commentaires/0"
+}
+[m[32m2017-12-18 20:43:49.295 WAT [main] c.b.i.CommentaireControllerIntegrationTest DEBUG: {
+    "timestamp": 1513626229246,
+    "status": 400,
+    "error": "Bad Request",
+    "exception": "org.springframework.web.bind.MissingServletRequestParameterException",
+    "message": "Required long parameter 'startDate' is not present",
+    "path": "/commentaire/commentaires/stats/PROJET"
+}
+[m[32m2017-12-18 20:43:49.860 WAT [main] c.b.i.CommentaireControllerIntegrationTest DEBUG: {
+    "timestamp": 1513626229783,
+    "status": 500,
+    "error": "Internal Server Error",
+    "exception": "javax.persistence.PersistenceException",
+    "message": "Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException\nInternal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)\nError Code: 1045",
+    "path": "/commentaire/commentaires"
+}
+[m[32m2017-12-18 20:43:50.766 WAT [main] c.b.i.CommentaireControllerIntegrationTest DEBUG: {
+    "timestamp": 1513626230695,
+    "status": 500,
+    "error": "Internal Server Error",
+    "exception": "javax.persistence.PersistenceException",
+    "message": "Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException\nInternal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)\nError Code: 1045",
+    "path": "/commentaire/commentaires/PROJET/1"
+}
 [m

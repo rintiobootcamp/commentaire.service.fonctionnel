@@ -61,6 +61,19 @@ public class CommentaireControllerIntegrationTest {
      */
     private int commentaireId = 0;
 
+    /**
+     * This entityType is initialize for stats method, you have
+     * to change it if you have a save data on this ID otherwise a error or
+     * conflit will be note by your test.
+     */
+    private String entityType = "PROJET";
+
+    /**
+     * This ID is initialize for create , getById, and update method, you have
+     * to change it if you have a save data on this ID otherwise a error or
+     * conflit will be note by your test.
+     */
+    private int entityId = 1;
 
     /* @BeforeTest
     public void count() throws Exception{
@@ -147,7 +160,7 @@ public class CommentaireControllerIntegrationTest {
      */
     @Test(priority = 2, groups = {"CommentaireTest"})
     public void statsCommentaire() throws Exception {
-        String statsURI = BASE_URI + COMMENTAIRE_PATH + "/stats/PROJET";
+        String statsURI = BASE_URI + COMMENTAIRE_PATH + "/stats/"+entityType;
         Response response = given()
                 .log().all()
                 .contentType("application/json")
@@ -213,7 +226,7 @@ public class CommentaireControllerIntegrationTest {
      */
     @Test(priority = 5, groups = {"CommentaireTest"})
     public void getCommentairesByEntity() throws Exception {
-        String getCommentairesByEntityURI = BASE_URI + COMMENTAIRE_PATH + "/PROJET/7";
+        String getCommentairesByEntityURI = BASE_URI + COMMENTAIRE_PATH +"/"+ entityType+ "/"+ entityId;
         Response response = given()
                 .log().all()
                 .contentType("application/json")
