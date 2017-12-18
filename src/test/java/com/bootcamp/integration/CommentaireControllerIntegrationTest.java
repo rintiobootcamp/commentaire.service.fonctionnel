@@ -75,15 +75,20 @@ public class CommentaireControllerIntegrationTest {
      */
     private int entityId = 1;
 
+
+    /**
+     * The startDate initialize for statistique method, you have
+     * make sure that this is correct in one of the value in database
+     */
     private long startDate = 1511907379;
+
+    /**
+     * The endDate initialize for statistique method, you have
+     * make sure that this is correct in one of the value in database
+     */
     private long endDate = 1511907390;
 
-    /* @BeforeTest
-    public void count() throws Exception{
-       int totalData = new CommentaireService().getCountCommentaires();
-       commentaireId=totalData;
-       logger.info( commentaireId );
-   }*/
+
     /**
      * This method create a new commentaire with the given id
      *
