@@ -28,7 +28,6 @@ public class CommentaireService implements DatabaseConstants {
 
     public Commentaire create(Commentaire commentaire) throws SQLException {
         commentaire.setDateCreation(System.currentTimeMillis());
-        commentaire.setDateMiseAJour(System.currentTimeMillis());
         CommentaireCRUD.create(commentaire);
         return commentaire;
     }
@@ -58,11 +57,20 @@ public class CommentaireService implements DatabaseConstants {
         return CommentaireCRUD.read(criterias);
     }
 
-    public int getAllCommentByEntity(EntityType entityType) throws SQLException {
+    public List<Commentaire> getCommentByEntity(EntityType entityType) throws SQLException {
         Criterias criterias = new Criterias();
         criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), null));
-        return CommentaireCRUD.read(criterias).size();
+        return CommentaireCRUD.read(criterias);
     }
+
+    public List<Commentaire> getCommentByEntity(EntityType entityType, long dateDebut, long dateFin) throws SQLException {
+        Criterias criterias = new Criterias();
+        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), "AND"));
+        criterias.addCriteria(new Criteria(new Rule("dateCreation", ">=", dateDebut),"AND"));
+        criterias.addCriteria(new Criteria(new Rule("dateCreation", "<=", dateFin),null));
+        return CommentaireCRUD.read(criterias);
+    }
+
 
     public List<Commentaire> readAll(HttpServletRequest request) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         Criterias criterias = RequestParser.getCriterias(request);

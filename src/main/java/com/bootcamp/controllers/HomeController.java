@@ -15,6 +15,6 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index() {
-        return "Rest Service for Comments";
+        return "Rest Service for Comment";
     }
 }

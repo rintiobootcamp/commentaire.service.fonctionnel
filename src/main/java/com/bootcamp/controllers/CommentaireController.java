@@ -68,24 +68,31 @@ public class CommentaireController {
 
 
 
+
     @RequestMapping(method = RequestMethod.GET, value = "/stats/{entityType}")
     @ApiVersions({"1.0"})
-    @ApiOperation(value = "Read all comments for entity", notes = "Read all comments for entity")
-    public ResponseEntity<Integer> readCommentByEntity(@PathVariable("entityType") String entityType ) {
+    @ApiOperation(value = "Read all comments for specifique entity", notes = "Read all comments for specifique entity")
+    public ResponseEntity<List<Commentaire>> readNumberCommentBySpecificEntity(@PathVariable("entityType") String entityType ,@RequestParam("startDate") long startDate, @RequestParam("endDate") long endDate  ) {
         EntityType entite = EntityType.valueOf(entityType);
-        int nbCommentaire =0;
+        List<Commentaire> commentaires = new ArrayList<>();
         HttpStatus httpStatus = null;
 
         try {
-            nbCommentaire = commentaireService.getAllCommentByEntity(entite);
-            httpStatus = HttpStatus.OK;
+            if(startDate==0 && endDate == 0){
+                commentaires = commentaireService.getCommentByEntity(entite);
+                httpStatus = HttpStatus.OK;
+            }else if(startDate!=0 && endDate != 0){
+                commentaires = commentaireService.getCommentByEntity(entite,startDate,endDate);
+                httpStatus = HttpStatus.OK;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(CommentaireController.class.getName()).log(Level.SEVERE, null, ex);
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        return new ResponseEntity<Integer>(nbCommentaire, httpStatus);
+        return new ResponseEntity<>(commentaires, httpStatus);
 
     }
+
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/{entityType}/{entityId}")
@@ -106,6 +113,11 @@ public class CommentaireController {
 
         return new ResponseEntity<List<Commentaire>>(commentaire, httpStatus);
     }
+
+
+
+
+
 
     @RequestMapping(method = RequestMethod.GET)
     @ApiVersions({"1.0"})
