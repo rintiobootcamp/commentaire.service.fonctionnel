@@ -1,9 +1,9 @@
 .idea
 .gradle
 CathegoriesRestServices.iml
-target
+target/
 /src/main/resources/local/
 logs
 *.out
 *.iml
-resources
+

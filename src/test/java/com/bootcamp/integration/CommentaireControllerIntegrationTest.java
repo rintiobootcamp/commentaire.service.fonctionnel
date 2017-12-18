@@ -46,7 +46,7 @@ public class CommentaireControllerIntegrationTest {
      * The Base URI of commentaire fonctionnal service, it can be change with
      * the online URIof this service.
      */
-    private String BASE_URI = "http://localhost:8083/commentaire";
+    private String BASE_URI = "http://104.131.60.151:8083/commentaire";
 
     /**
      * The path of the Commentaire controller, according to this controller
@@ -75,6 +75,9 @@ public class CommentaireControllerIntegrationTest {
      */
     private int entityId = 1;
 
+    private long startDate = 1511907379;
+    private long endDate = 1511907390;
+
     /* @BeforeTest
     public void count() throws Exception{
        int totalData = new CommentaireService().getCountCommentaires();
@@ -97,9 +100,8 @@ public class CommentaireControllerIntegrationTest {
     @Test(priority = 0, groups = {"CommentaireTest"})
     public void createCommentaire() throws Exception {
         String createURI = BASE_URI + COMMENTAIRE_PATH;
-        Commentaire commentaire = getCommentaireById(1);
+        Commentaire commentaire = getCommentaireById(4);
         commentaire.setId(commentaireId);
-        commentaire.setContenu("commentaire test after the doc");
         Gson gson = new Gson();
         String commentaireData = gson.toJson(commentaire);
         Response response = given()
@@ -131,9 +133,9 @@ public class CommentaireControllerIntegrationTest {
      * @throws Exception
      */
     @Test(priority = 1, groups = {"CommentaireTest"})
-    public void getCommentaireById() throws Exception {
+    public void getCommentaireByIdTest() throws Exception {
 
-        String getCommentaireById = BASE_URI + COMMENTAIRE_PATH + "/" + commentaireId;
+        String getCommentaireById = BASE_URI + COMMENTAIRE_PATH +"/"+ commentaireId;
 
         Response response = given()
                 .log().all()
@@ -160,8 +162,10 @@ public class CommentaireControllerIntegrationTest {
      */
     @Test(priority = 2, groups = {"CommentaireTest"})
     public void statsCommentaire() throws Exception {
-        String statsURI = BASE_URI + COMMENTAIRE_PATH + "/stats/"+entityType;
+        String statsURI = BASE_URI + COMMENTAIRE_PATH +"/stats/"+entityType;
         Response response = given()
+                .queryParam( "startDate",startDate)
+                .queryParam( "endDate",endDate )
                 .log().all()
                 .contentType("application/json")
                 .expect()
