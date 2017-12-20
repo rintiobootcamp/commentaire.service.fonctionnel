@@ -41,7 +41,7 @@ public class CommentaireController {
      * @param comment
      * @return comment
      */
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, value = "/admin")
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Create a new commentaire", notes = "Create a new commentaire")
     public ResponseEntity<Commentaire> create(@RequestBody @Valid Commentaire comment) {
@@ -159,7 +159,7 @@ public class CommentaireController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/admin/{id}", method = RequestMethod.DELETE)
     @ApiVersions({"1.0"})
     @ApiOperation(value = "delete commentaire ", notes = "delete commentaire by id")
     public ResponseEntity<Commentaire> delete(@PathVariable int id) throws Exception {

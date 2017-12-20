@@ -16,22 +16,18 @@
 [INFO] 
 [INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ CommentaireRestServices ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Copying 7 resources
-[INFO] Copying 21 resources
+[INFO] skip non existing resourceDirectory /home/soul/bootcamp/Review Release_1.3.0/clone/commentaire.service.fonctionnel/src/main/resources
+[INFO] Copying 23 resources
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.2:compile (default-compile) @ CommentaireRestServices ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 8 source files to /home/soul/bootcamp/Review Release_1.3.0/clone/commentaire.service.fonctionnel/target/classes
+[INFO] Nothing to compile - all classes are up to date
 [INFO] 
 [INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ CommentaireRestServices ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
 [INFO] Copying 6 resources
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.2:testCompile (default-testCompile) @ CommentaireRestServices ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 3 source files to /home/soul/bootcamp/Review Release_1.3.0/clone/commentaire.service.fonctionnel/target/test-classes
-[INFO] /home/soul/bootcamp/Review Release_1.3.0/clone/commentaire.service.fonctionnel/src/test/java/com/bootcamp/service/CommentaireServiceTest.java: /home/soul/bootcamp/Review Release_1.3.0/clone/commentaire.service.fonctionnel/src/test/java/com/bootcamp/service/CommentaireServiceTest.java uses unchecked or unsafe operations.
-[INFO] /home/soul/bootcamp/Review Release_1.3.0/clone/commentaire.service.fonctionnel/src/test/java/com/bootcamp/service/CommentaireServiceTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] Nothing to compile - all classes are up to date
 [INFO] 
 [INFO] <<< spring-boot-maven-plugin:1.5.3.RELEASE:run (default-cli) < test-compile @ CommentaireRestServices <<<
 [INFO] 
@@ -53,34 +49,6 @@ log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more in
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v1.5.8.RELEASE)
 
-[32m2017-12-18 20:15:55.397 WAT [background-preinit] o.h.v.i.u.Version INFO : HV000001: Hibernate Validator 5.3.5.Final
-[m[EL Info]: 2017-12-18 20:19:28.871--ServerSession(435820632)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
-[EL Severe]: ejb: 2017-12-18 20:19:33.128--ServerSession(435820632)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)
-Error Code: 1045
-[EL Info]: 2017-12-18 20:19:36.737--ServerSession(435820632)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
-[EL Severe]: ejb: 2017-12-18 20:19:36.901--ServerSession(435820632)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)
-Error Code: 1045
-[EL Info]: 2017-12-18 20:19:39.823--ServerSession(415035364)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
-[EL Info]: connection: 2017-12-18 20:19:45.371--ServerSession(415035364)--file:/home/soul/.m2/repository/com/bootcamp/db-access/1.0-SNAPSHOT/db-access-1.0-SNAPSHOT.jar_databasePU login successful
-[EL Info]: 2017-12-18 20:43:44.307--ServerSession(31076140)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
-[EL Severe]: ejb: 2017-12-18 20:43:46.304--ServerSession(31076140)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)
-Error Code: 1045
-[EL Info]: 2017-12-18 20:43:48.25--ServerSession(31076140)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
-[EL Severe]: ejb: 2017-12-18 20:43:48.655--ServerSession(31076140)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)
-Error Code: 1045
-[EL Info]: 2017-12-18 20:43:49.551--ServerSession(31076140)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
-[EL Severe]: ejb: 2017-12-18 20:43:49.63--ServerSession(31076140)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)
-Error Code: 1045
-[EL Info]: 2017-12-18 20:43:49.951--ServerSession(31076140)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
-[EL Severe]: ejb: 2017-12-18 20:43:50.044--ServerSession(31076140)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)
-Error Code: 1045
-[EL Info]: 2017-12-18 20:43:50.479--ServerSession(31076140)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
-[EL Severe]: ejb: 2017-12-18 20:43:50.67--ServerSession(31076140)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: NO)
-Error Code: 1045
+[32m2017-12-19 07:37:39.371 WAT [background-preinit] o.h.v.i.u.Version INFO : HV000001: Hibernate Validator 5.3.5.Final
+[m[EL Info]: 2017-12-19 07:38:12.796--ServerSession(1138579390)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
+[EL Info]: connection: 2017-12-19 07:38:16.171--ServerSession(1138579390)--file:/home/soul/bootcamp/Review Release_1.3.0/clone/commentaire.service.fonctionnel/target/classes/_databasePU login successful
