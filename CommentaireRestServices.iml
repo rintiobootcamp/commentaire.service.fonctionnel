@@ -15,6 +15,8 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.testng:testng:6.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.beust:jcommander:1.64" level="project" />
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.17" level="project" />
+    <orderEntry type="library" name="Maven: io.sentry:sentry-log4j2:1.6.3" level="project" />
+    <orderEntry type="library" name="Maven: io.sentry:sentry:1.6.3" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: com.bootcamp:commons:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: io.swagger:swagger-jaxrs:1.5.16" level="project" />
