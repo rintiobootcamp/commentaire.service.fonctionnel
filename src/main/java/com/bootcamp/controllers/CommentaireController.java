@@ -117,7 +117,7 @@ public class CommentaireController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{entityType}/{entityId}")
     @ApiVersions({"1.0"})
-    @ApiOperation(value = "Read a comments", notes = "Read a comments")
+    @ApiOperation(value = "Read a comments by EntityType by EntityId", notes = "Read a comments by EntityType by EntityId")
     public ResponseEntity<List<Commentaire>> readByEntity(@PathVariable("entityType") String entityType, @PathVariable("entityId") int entityId) {
         EntityType entite = EntityType.valueOf(entityType);
         List<Commentaire> commentaire = new ArrayList<Commentaire>();
