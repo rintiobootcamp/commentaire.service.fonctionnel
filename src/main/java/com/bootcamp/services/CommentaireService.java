@@ -43,6 +43,7 @@ public class CommentaireService implements DatabaseConstants {
      * @throws SQLException
      */
     public Commentaire update(Commentaire commentaire) throws SQLException {
+        commentaire.setDateMiseAJour(System.currentTimeMillis());
         CommentaireCRUD.update(commentaire);
         return commentaire;
     }
