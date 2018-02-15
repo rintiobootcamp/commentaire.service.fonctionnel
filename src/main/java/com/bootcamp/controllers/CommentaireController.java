@@ -93,7 +93,7 @@ public class CommentaireController {
         HttpStatus httpStatus = null;
 
         try {
-            if (startDate.equals("") && endDate.equals("")) {
+            if (startDate.equals("0") && endDate.equals("0")) {
                 commentaires = commentaireService.getCommentByEntity(entite);
                 httpStatus = HttpStatus.OK;
             } else if (!startDate.equals("") && !endDate.equals("")) {
