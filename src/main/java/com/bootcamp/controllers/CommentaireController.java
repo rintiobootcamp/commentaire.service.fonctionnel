@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -85,21 +86,21 @@ public class CommentaireController {
     @RequestMapping(method = RequestMethod.GET, value = "/stats/{entityType}")
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Read all comments for specifique entity", notes = "Read all comments for specifique entity")
-    public ResponseEntity<List<Commentaire>> readNumberCommentBySpecificEntity(@PathVariable("entityType") String entityType ,@RequestParam("startDate") long startDate, @RequestParam("endDate") long endDate  ) {
+    public ResponseEntity<List<Commentaire>> readNumberCommentBySpecificEntity(@PathVariable("entityType") String entityType, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
         EntityType entite = EntityType.valueOf(entityType);
         List<Commentaire> commentaires = new ArrayList<>();
 
         HttpStatus httpStatus = null;
 
         try {
-            if(startDate==0 && endDate == 0){
+            if (startDate.equals("") && endDate.equals("")) {
                 commentaires = commentaireService.getCommentByEntity(entite);
                 httpStatus = HttpStatus.OK;
-            }else if(startDate!=0 && endDate != 0){
-                commentaires = commentaireService.getCommentByEntity(entite,startDate,endDate);
+            } else if (!startDate.equals("") && !endDate.equals("")) {
+                commentaires = commentaireService.getCommentByEntity(entite, startDate, endDate);
                 httpStatus = HttpStatus.OK;
             }
-        } catch (SQLException ex) {
+        } catch (SQLException | ParseException ex) {
             Logger.getLogger(CommentaireController.class.getName()).log(Level.SEVERE, null, ex);
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         }
@@ -114,7 +115,6 @@ public class CommentaireController {
      * @param entityId
      * @return comments list
      */
-
     @RequestMapping(method = RequestMethod.GET, value = "/{entityType}/{entityId}")
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Read a comments by EntityType by EntityId", notes = "Read a comments by EntityType by EntityId")
@@ -134,14 +134,12 @@ public class CommentaireController {
         return new ResponseEntity<List<Commentaire>>(commentaire, httpStatus);
     }
 
-
     /**
      * Get all the comments of the database
      *
      * @return comments list
      * @throws Exception
      */
-
     @RequestMapping(method = RequestMethod.GET)
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Get list of commentaire by request", notes = "Get list of commentaires by request")
