@@ -17,8 +17,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
@@ -110,10 +108,11 @@ public class CommentaireService implements DatabaseConstants {
         long dateDebut = formatter.parse(startDate).getTime();
         long dateFin = formatter.parse(endDate).getTime();
         TypedQuery<Commentaire> query = em.createQuery(
-                "SELECT e FROM Commentaire e WHERE e.dateCreation BETWEEN ?1 AND ?2", Commentaire.class);
-        List<Commentaire> commentaires = query.setParameter(1, dateDebut)
-                .setParameter(2, dateFin)
-                .getResultList();
+                "SELECT e FROM Commentaire e WHERE e.entityType =:?1 AND e.dateCreation BETWEEN ?2 AND ?3", Commentaire.class);
+        List<Commentaire> commentaires = query.setParameter(1, entityType)
+                                              .setParameter(2, dateDebut)
+                                              .setParameter(3, dateFin)
+                                              .getResultList();
         return commentaires;
     }
 
