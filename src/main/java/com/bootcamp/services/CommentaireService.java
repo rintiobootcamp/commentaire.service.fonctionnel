@@ -109,7 +109,7 @@ public class CommentaireService implements DatabaseConstants {
         long dateFin = formatter.parse(endDate).getTime();
         TypedQuery<Commentaire> query = em.createQuery(
                 "SELECT e FROM Commentaire e WHERE e.entityType =?1 AND e.dateCreation BETWEEN ?2 AND ?3", Commentaire.class);
-        List<Commentaire> commentaires = query.setParameter(1, entityType)
+        List<Commentaire> commentaires = query.setParameter(1, entityType.name())
                                               .setParameter(2, dateDebut)
                                               .setParameter(3, dateFin)
                                               .getResultList();
