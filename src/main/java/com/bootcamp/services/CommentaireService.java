@@ -14,7 +14,12 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  * Created by darextossa on 11/27/17.
@@ -90,22 +95,26 @@ public class CommentaireService implements DatabaseConstants {
         return CommentaireCRUD.read(criterias);
     }
 
-
     public List<Commentaire> getCommentByEntity(EntityType entityType) throws SQLException {
         Criterias criterias = new Criterias();
         criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), null));
         return CommentaireCRUD.read(criterias);
     }
 
-    public List<Commentaire> getCommentByEntity(EntityType entityType, long dateDebut, long dateFin) throws SQLException {
-        Criterias criterias = new Criterias();
-        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), "AND"));
-        criterias.addCriteria(new Criteria(new Rule("dateCreation", ">=", dateDebut),"AND"));
-        criterias.addCriteria(new Criteria(new Rule("dateCreation", "<=", dateFin),null));
-        return CommentaireCRUD.read(criterias);
+    public List<Commentaire> getCommentByEntity(EntityType entityType, String startDate, String endDate) throws SQLException, ParseException {
+        EntityManager em = Persistence.createEntityManagerFactory(DatabaseConstants.PERSISTENCE_UNIT).createEntityManager();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        long dateDebut = formatter.parse(startDate).getTime();
+        long dateFin = formatter.parse(endDate).getTime();
+        TypedQuery<Commentaire> query = em.createQuery(
+                "SELECT e FROM Commentaire e WHERE e.entityType =?1 AND e.dateCreation BETWEEN ?2 AND ?3", Commentaire.class);
+        List<Commentaire> commentaires = query.setParameter(1, entityType.name())
+                                              .setParameter(2, dateDebut)
+                                              .setParameter(3, dateFin)
+                                              .getResultList();
+        return commentaires;
     }
-
-
 
     /**
      * Get all the comments of the database matching the given request
@@ -117,7 +126,6 @@ public class CommentaireService implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
-
     public List<Commentaire> readAll(HttpServletRequest request) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         Criterias criterias = RequestParser.getCriterias(request);
         List<String> fields = RequestParser.getFields(request);
