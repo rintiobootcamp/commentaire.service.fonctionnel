@@ -8,7 +8,10 @@ import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.commons.models.Rule;
 import com.bootcamp.commons.ws.utils.RequestParser;
 import com.bootcamp.crud.CommentaireCRUD;
+import com.bootcamp.entities.Censure;
 import com.bootcamp.entities.Commentaire;
+import com.rintio.elastic.client.ElasticClient;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +19,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
@@ -60,7 +65,7 @@ public class CommentaireService implements DatabaseConstants {
      * @return the inserted comment
      * @throws SQLException
      */
-    public Commentaire delete(int id) throws SQLException {
+    public Commentaire delete(int id) throws Exception {
         Commentaire commentaire = read(id);
         CommentaireCRUD.delete(commentaire);
         return commentaire;
@@ -73,11 +78,12 @@ public class CommentaireService implements DatabaseConstants {
      * @return comment
      * @throws SQLException
      */
-    public Commentaire read(int id) throws SQLException {
-        Criterias criterias = new Criterias();
-        criterias.addCriteria(new Criteria("id", "=", id));
-        List<Commentaire> commentaires = CommentaireCRUD.read(criterias);
-        return commentaires.get(0);
+    public Commentaire read(int id) throws Exception {
+//        Criterias criterias = new Criterias();
+//        criterias.addCriteria(new Criteria("id", "=", id));
+//        List<Commentaire> commentaires = CommentaireCRUD.read(criterias);
+//        return commentaires.get(0);
+        return getAllCommentaire().stream().filter(t->t.getId()==id).findFirst().get();
     }
 
     /**
@@ -88,17 +94,19 @@ public class CommentaireService implements DatabaseConstants {
      * @return comments list
      * @throws SQLException
      */
-    public List<Commentaire> getByEntity(EntityType entityType, int entityId) throws SQLException {
-        Criterias criterias = new Criterias();
-        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), "AND"));
-        criterias.addCriteria(new Criteria(new Rule("entityId", "=", entityId), null));
-        return CommentaireCRUD.read(criterias);
+    public List<Commentaire> getByEntity(EntityType entityType, int entityId) throws Exception {
+//        Criterias criterias = new Criterias();
+//        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), "AND"));
+//        criterias.addCriteria(new Criteria(new Rule("entityId", "=", entityId), null));
+//        return CommentaireCRUD.read(criterias);
+        return getAllCommentaire().stream().filter(t->t.getEntityType().equals(entityType)).filter(t->t.getEntityId()==entityId).collect(Collectors.toList());
     }
 
-    public List<Commentaire> getCommentByEntity(EntityType entityType) throws SQLException {
-        Criterias criterias = new Criterias();
-        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), null));
-        return CommentaireCRUD.read(criterias);
+    public List<Commentaire> getCommentByEntity(EntityType entityType) throws Exception {
+//        Criterias criterias = new Criterias();
+//        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), null));
+//        return CommentaireCRUD.read(criterias);
+        return getAllCommentaire().stream().filter(t->t.getEntityType().equals(entityType)).collect(Collectors.toList());
     }
 
     public List<Commentaire> getCommentByEntity(EntityType entityType, String startDate, String endDate) throws SQLException, ParseException {
@@ -126,12 +134,12 @@ public class CommentaireService implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
-    public List<Commentaire> readAll(HttpServletRequest request) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
+    public List<Commentaire> readAll(HttpServletRequest request) throws SQLException, Exception, DatabaseException, InvocationTargetException {
         Criterias criterias = RequestParser.getCriterias(request);
         List<String> fields = RequestParser.getFields(request);
         List<Commentaire> commentaires = null;
         if (criterias == null && fields == null) {
-            commentaires = CommentaireCRUD.read();
+            commentaires = getAllCommentaire();
         } else if (criterias != null && fields == null) {
             commentaires = CommentaireCRUD.read(criterias);
         } else if (criterias == null && fields != null) {
@@ -141,6 +149,17 @@ public class CommentaireService implements DatabaseConstants {
         }
 
         return commentaires;
+    }
+
+    public List<Commentaire> getAllCommentaire() throws Exception{
+        ElasticClient elasticClient = new ElasticClient();
+        List<Object> objects = elasticClient.getAllObject("commentaires");
+        ModelMapper modelMapper = new ModelMapper();
+        List<Commentaire> rest = new ArrayList<>();
+        for(Object obj:objects){
+            rest.add(modelMapper.map(obj,Commentaire.class));
+        }
+        return rest;
     }
 
     /**

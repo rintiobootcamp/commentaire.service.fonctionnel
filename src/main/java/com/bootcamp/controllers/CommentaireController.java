@@ -67,7 +67,7 @@ public class CommentaireController {
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Read a comments", notes = "Read a comments")
-    public ResponseEntity<Commentaire> read(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Commentaire> read(@PathVariable(name = "id") int id) throws Exception {
 
         Commentaire commentaire = new Commentaire();
         HttpStatus httpStatus = null;
@@ -86,7 +86,7 @@ public class CommentaireController {
     @RequestMapping(method = RequestMethod.GET, value = "/stats/{entityType}")
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Read all comments for specifique entity", notes = "Read all comments for specifique entity")
-    public ResponseEntity<List<Commentaire>> readNumberCommentBySpecificEntity(@PathVariable("entityType") String entityType, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
+    public ResponseEntity<List<Commentaire>> readNumberCommentBySpecificEntity(@PathVariable("entityType") String entityType, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) throws Exception{
         EntityType entite = EntityType.valueOf(entityType);
         List<Commentaire> commentaires = new ArrayList<>();
 
@@ -118,7 +118,7 @@ public class CommentaireController {
     @RequestMapping(method = RequestMethod.GET, value = "/{entityType}/{entityId}")
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Read a comments by EntityType by EntityId", notes = "Read a comments by EntityType by EntityId")
-    public ResponseEntity<List<Commentaire>> readByEntity(@PathVariable("entityType") String entityType, @PathVariable("entityId") int entityId) {
+    public ResponseEntity<List<Commentaire>> readByEntity(@PathVariable("entityType") String entityType, @PathVariable("entityId") int entityId) throws Exception {
         EntityType entite = EntityType.valueOf(entityType);
         List<Commentaire> commentaire = new ArrayList<Commentaire>();
         HttpStatus httpStatus = null;
