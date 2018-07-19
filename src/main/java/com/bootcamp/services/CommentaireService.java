@@ -31,7 +31,10 @@ import javax.persistence.TypedQuery;
  */
 @Component
 public class CommentaireService implements DatabaseConstants {
-
+ElasticClient elasticClient;
+public CommentaireService(){
+    elasticClient = new ElasticClient();
+}
     /**
      * Insert a comment in the database
      *
@@ -160,6 +163,16 @@ public class CommentaireService implements DatabaseConstants {
             rest.add(modelMapper.map(obj,Commentaire.class));
         }
         return rest;
+    }
+
+    public boolean createAllIndexCommentaire()throws Exception{
+        ElasticClient elasticClient = new ElasticClient();
+        List<Commentaire> commentaires = CommentaireCRUD.read();
+        for (Commentaire commentaire : commentaires){
+            elasticClient.creerIndexObjectNative("commentaires","commentaire",commentaire,commentaire.getId());
+//            LOG.info("Commentaire "+commentaire.getId()+" created");
+        }
+        return true;
     }
 
     /**
