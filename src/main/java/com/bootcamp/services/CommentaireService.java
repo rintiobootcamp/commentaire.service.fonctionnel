@@ -14,6 +14,7 @@ import com.rintio.elastic.client.ElasticClient;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -32,7 +33,8 @@ import javax.persistence.TypedQuery;
 @Component
 public class CommentaireService implements DatabaseConstants {
 ElasticClient elasticClient;
-public CommentaireService(){
+@PostConstruct
+public void CommentaireService(){
     elasticClient = new ElasticClient();
 }
     /**
