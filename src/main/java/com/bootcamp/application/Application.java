@@ -32,7 +32,7 @@ import java.util.Locale;
  *
  * @author Bello
  */
-@EnableEurekaClient
+//@EnableEurekaClient
 @SpringBootApplication
 @Configuration
 @ComponentScan({"com.bootcamp"})
