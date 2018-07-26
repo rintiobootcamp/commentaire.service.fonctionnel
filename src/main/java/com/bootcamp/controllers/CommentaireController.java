@@ -45,7 +45,7 @@ public class CommentaireController {
     @RequestMapping(method = RequestMethod.POST)
     @ApiVersions({"1.0"})
     @ApiOperation(value = "Create a new commentaire", notes = "Create a new commentaire")
-    public ResponseEntity<Commentaire> create(@RequestBody @Valid Commentaire comment) {
+    public ResponseEntity<Commentaire> create(@RequestBody @Valid Commentaire comment) throws Exception {
 
         HttpStatus httpStatus = null;
 

@@ -44,9 +44,10 @@ public void CommentaireService(){
      * @return the inserted comment
      * @throws SQLException
      */
-    public Commentaire create(Commentaire commentaire) throws SQLException {
+    public Commentaire create(Commentaire commentaire) throws SQLException,Exception {
         commentaire.setDateCreation(System.currentTimeMillis());
         CommentaireCRUD.create(commentaire);
+        createAllIndexCommentaire();
         return commentaire;
     }
 
@@ -57,9 +58,10 @@ public void CommentaireService(){
      * @return the inserted comment
      * @throws SQLException
      */
-    public Commentaire update(Commentaire commentaire) throws SQLException {
+    public Commentaire update(Commentaire commentaire) throws SQLException,Exception {
         commentaire.setDateMiseAJour(System.currentTimeMillis());
         CommentaireCRUD.update(commentaire);
+        createAllIndexCommentaire();
         return commentaire;
     }
 
@@ -73,6 +75,7 @@ public void CommentaireService(){
     public Commentaire delete(int id) throws Exception {
         Commentaire commentaire = read(id);
         CommentaireCRUD.delete(commentaire);
+        createAllIndexCommentaire();
         return commentaire;
     }
 
@@ -104,7 +107,7 @@ public void CommentaireService(){
 //        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), "AND"));
 //        criterias.addCriteria(new Criteria(new Rule("entityId", "=", entityId), null));
 //        return CommentaireCRUD.read(criterias);
-        return getAllCommentaire().stream().filter(t->t.getEntityType().equals(entityType)).filter(t->t.getEntityId()==entityId).collect(Collectors.toList());
+        return getAllCommentaire().stream().filter(t->t.getEntityType().equals(entityType) && t.getId()==entityId).collect(Collectors.toList());
     }
 
     public List<Commentaire> getCommentByEntity(EntityType entityType) throws Exception {
@@ -157,7 +160,7 @@ public void CommentaireService(){
     }
 
     public List<Commentaire> getAllCommentaire() throws Exception{
-        ElasticClient elasticClient = new ElasticClient();
+//        ElasticClient elasticClient = new ElasticClient();
         List<Object> objects = elasticClient.getAllObject("commentaires");
         ModelMapper modelMapper = new ModelMapper();
         List<Commentaire> rest = new ArrayList<>();
@@ -168,7 +171,7 @@ public void CommentaireService(){
     }
 
     public boolean createAllIndexCommentaire()throws Exception{
-        ElasticClient elasticClient = new ElasticClient();
+//        ElasticClient elasticClient = new ElasticClient();
         List<Commentaire> commentaires = CommentaireCRUD.read();
         for (Commentaire commentaire : commentaires){
             elasticClient.creerIndexObjectNative("commentaires","commentaire",commentaire,commentaire.getId());
@@ -199,10 +202,11 @@ public void CommentaireService(){
      * @return count
      * @throws SQLException
      */
-    public int getAllCommentByEntity(EntityType entityType) throws SQLException {
-        Criterias criterias = new Criterias();
-        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), null));
-        return CommentaireCRUD.read(criterias).size();
+    public int getAllCommentByEntity(EntityType entityType) throws Exception {
+//        Criterias criterias = new Criterias();
+//        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), null));
+//        return CommentaireCRUD.read(criterias).size();
+        return getAllCommentaire().size();
     }
 
 }
