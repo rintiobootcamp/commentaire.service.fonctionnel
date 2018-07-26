@@ -107,7 +107,7 @@ public void CommentaireService(){
 //        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), "AND"));
 //        criterias.addCriteria(new Criteria(new Rule("entityId", "=", entityId), null));
 //        return CommentaireCRUD.read(criterias);
-        List<Commentaire> rest = getAllCommentaire().stream().filter(t->t.getEntityType().equals(entityType)).collect(Collectors.toList());
+        List<Commentaire> rest = getAllCommentaire().stream().filter(t->t.getEntityType().equalsIgnoreCase(entityType.toString())).collect(Collectors.toList());
         return rest.stream().filter(t->t.getEntityId()==entityId).collect(Collectors.toList());
     }
 
@@ -115,7 +115,7 @@ public void CommentaireService(){
 //        Criterias criterias = new Criterias();
 //        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), null));
 //        return CommentaireCRUD.read(criterias);
-        return getAllCommentaire().stream().filter(t->t.getEntityType().equals(entityType)).collect(Collectors.toList());
+        return getAllCommentaire().stream().filter(t->t.getEntityType().equalsIgnoreCase(entityType.toString())).collect(Collectors.toList());
     }
 
     public List<Commentaire> getCommentByEntity(EntityType entityType, String startDate, String endDate) throws SQLException, ParseException {
