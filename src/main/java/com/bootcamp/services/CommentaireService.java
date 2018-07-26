@@ -107,7 +107,8 @@ public void CommentaireService(){
 //        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), "AND"));
 //        criterias.addCriteria(new Criteria(new Rule("entityId", "=", entityId), null));
 //        return CommentaireCRUD.read(criterias);
-        return getAllCommentaire().stream().filter(t->t.getEntityType().equals(entityType) && t.getEntityId()==entityId).collect(Collectors.toList());
+        List<Commentaire> rest = getAllCommentaire().stream().filter(t->t.getEntityType().equals(entityType)).collect(Collectors.toList());
+        return rest.stream().filter(t->t.getEntityId()==entityId).collect(Collectors.toList());
     }
 
     public List<Commentaire> getCommentByEntity(EntityType entityType) throws Exception {
