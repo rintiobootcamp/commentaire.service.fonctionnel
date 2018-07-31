@@ -33,9 +33,18 @@ import javax.persistence.TypedQuery;
 @Component
 public class CommentaireService implements DatabaseConstants {
 ElasticClient elasticClient;
+private List<Commentaire> commentaires;
+
 @PostConstruct
 public void CommentaireService(){
+    this.commentaires = new ArrayList<>();
     elasticClient = new ElasticClient();
+}
+
+public List<Commentaire> lireCommentaire() throws Exception{
+    if(this.commentaires.isEmpty())
+        getAllCommentaire();
+    return this.commentaires;
 }
     /**
      * Insert a comment in the database
@@ -91,7 +100,7 @@ public void CommentaireService(){
 //        criterias.addCriteria(new Criteria("id", "=", id));
 //        List<Commentaire> commentaires = CommentaireCRUD.read(criterias);
 //        return commentaires.get(0);
-        return getAllCommentaire().stream().filter(t->t.getId()==id).findFirst().get();
+        return lireCommentaire().stream().filter(t->t.getId()==id).findFirst().get();
     }
 
     /**
@@ -107,7 +116,7 @@ public void CommentaireService(){
 //        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), "AND"));
 //        criterias.addCriteria(new Criteria(new Rule("entityId", "=", entityId), null));
 //        return CommentaireCRUD.read(criterias);
-        List<Commentaire> rest = getAllCommentaire().stream().filter(t->t.getEntityType().equalsIgnoreCase(entityType.toString())).collect(Collectors.toList());
+        List<Commentaire> rest = lireCommentaire().stream().filter(t->t.getEntityType().equalsIgnoreCase(entityType.toString())).collect(Collectors.toList());
         return rest.stream().filter(t->t.getEntityId()==entityId).collect(Collectors.toList());
     }
 
@@ -115,7 +124,7 @@ public void CommentaireService(){
 //        Criterias criterias = new Criterias();
 //        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), null));
 //        return CommentaireCRUD.read(criterias);
-        return getAllCommentaire().stream().filter(t->t.getEntityType().equalsIgnoreCase(entityType.toString())).collect(Collectors.toList());
+        return lireCommentaire().stream().filter(t->t.getEntityType().equalsIgnoreCase(entityType.toString())).collect(Collectors.toList());
     }
 
     public List<Commentaire> getCommentByEntity(EntityType entityType, String startDate, String endDate) throws SQLException, ParseException {
@@ -148,7 +157,7 @@ public void CommentaireService(){
         List<String> fields = RequestParser.getFields(request);
         List<Commentaire> commentaires = null;
         if (criterias == null && fields == null) {
-            commentaires = getAllCommentaire();
+            commentaires = lireCommentaire();
         } else if (criterias != null && fields == null) {
             commentaires = CommentaireCRUD.read(criterias);
         } else if (criterias == null && fields != null) {
@@ -168,6 +177,7 @@ public void CommentaireService(){
         for(Object obj:objects){
             rest.add(modelMapper.map(obj,Commentaire.class));
         }
+        this.commentaires = rest;
         return rest;
     }
 
@@ -207,7 +217,7 @@ public void CommentaireService(){
 //        Criterias criterias = new Criterias();
 //        criterias.addCriteria(new Criteria(new Rule("entityType", "=", entityType), null));
 //        return CommentaireCRUD.read(criterias).size();
-        return getAllCommentaire().size();
+        return lireCommentaire().size();
     }
 
 }
