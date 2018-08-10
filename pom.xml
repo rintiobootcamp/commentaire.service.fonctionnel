@@ -49,6 +49,12 @@
             <groupId>com.rintio</groupId>
             <artifactId>elastic</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.modelmapper</groupId>
@@ -63,11 +69,7 @@
             <version>6.11</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>io.sentry</groupId>
-            <artifactId>sentry-log4j2</artifactId>
-            <version>1.6.3</version>
-        </dependency>
+
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -95,6 +97,10 @@
                     <groupId>com.bootcamp</groupId>
                     <artifactId>commons</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -106,14 +112,11 @@
                 <exclusion>
                     <groupId>com.bootcamp</groupId>
                     <artifactId>commons</artifactId>
-
                 </exclusion>
-
                     <exclusion>
                         <groupId>org.slf4j</groupId>
                         <artifactId>slf4j-log4j12</artifactId>
                     </exclusion>
-
             </exclusions>
         </dependency>
 
@@ -261,6 +264,12 @@
             <groupId>com.bootcamp</groupId>
             <artifactId>db-access</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.jayway.restassured/rest-assured -->
         <dependency>
